@@ -7,12 +7,11 @@ import {
   WHATSAPP_URL,
 } from "@/lib/config";
 import BackToTop from "./BackToTop";
-import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "./Icons";
+import { InstagramIcon, WhatsAppIcon } from "./Icons";
 
 const SOCIALS = [
   { label: "Instagram", href: BRAND.instagram, icon: InstagramIcon },
   { label: "WhatsApp", href: WHATSAPP_URL, icon: WhatsAppIcon },
-  { label: "Facebook", href: BRAND.facebook, icon: FacebookIcon },
 ];
 
 const linkCls = "text-white/60 transition-colors duration-300 hover:text-brand";
@@ -92,32 +91,44 @@ export default function Footer() {
           <h3 className={titleCls}>Contato</h3>
           <ul className="space-y-3 text-sm">
             <li>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkCls}>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkCls}
+              >
                 WhatsApp: {BRAND.phoneDisplayShort} - {BRAND.owner}
               </a>
             </li>
             <li>
-              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className={linkCls}>
+              <a
+                href={BRAND.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkCls}
+              >
                 Instagram
               </a>
             </li>
             <li>
-              <a href={BRAND.facebook} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                Facebook
+              <a
+                href={MAPS_VIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkCls}
+              >
+                Como chegar
               </a>
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Barra inferior: copyright + botão "Voltar ao topo"
-          - mobile: botão centralizado acima do copyright e espaço extra embaixo (pb-24)
-          - desktop: copyright à esquerda e botão à direita, afastado (sm:mr-24)
-            para ficar ao lado do botão flutuante do WhatsApp, sem sobrepor */}
+      {/* Barra inferior: copyright + botão "Voltar ao topo" */}
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col-reverse items-center gap-6 px-5 pb-24 pt-6 sm:flex-row sm:justify-between sm:pb-6 lg:px-8">
           <p className="text-center text-xs text-white/40 sm:text-left">
-            © 2026 Pitbull Cortes. Todos os direitos reservados.
+            © {new Date().getFullYear()} Pitbull Cortes. Todos os direitos reservados.
           </p>
           <div className="sm:mr-24">
             <BackToTop />

@@ -14,8 +14,7 @@ export const BRAND = {
   address: "Rua Enéas Marques, 139 - Guaraituba",
   addressFull: "Rua Enéas Marques, 139 - Bairro Guaraituba",
   // 👉 SUBSTITUA pelos links reais das redes sociais
-  instagram: "https://instagram.com/SEU_INSTAGRAM_AQUI",
-  facebook: "https://facebook.com/SUA_PAGINA_AQUI",
+  instagram: "https://www.instagram.com/pitbullcortes041/",
 } as const;
 
 /** Mensagem pré-preenchida enviada ao WhatsApp */

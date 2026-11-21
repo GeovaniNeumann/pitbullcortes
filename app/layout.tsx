@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Inter } from "next/font/google";
+// @ts-ignore — O Next.js resolve a importação de CSS global durante o build.
 import "./globals.css";
 
 // Fonte display (títulos) e fonte do corpo
