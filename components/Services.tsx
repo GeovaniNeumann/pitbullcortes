@@ -1,8 +1,10 @@
 import type { ComponentType, SVGProps } from "react";
 import { whatsappFor } from "@/lib/config";
 import {
-  BeardIcon,
   ComboIcon,
+  CrownIcon,
+  EyeIcon,
+  RazorIcon,
   ScissorsIcon,
   WhatsAppIcon,
 } from "./Icons";
@@ -18,23 +20,35 @@ type Service = {
 
 const SERVICES: Service[] = [
   {
-    name: "Corte Masculino",
-    description: "Corte moderno ou clássico, feito sob medida para o seu estilo e formato de rosto.",
-    price: "R$ 00,00",
+    name: "Corte com Freestyle",
+    description: "Corte com desenhos e detalhes na navalha para um visual único e cheio de personalidade.",
+    price: "R$ 40",
+    icon: CrownIcon,
+  },
+  {
+    name: "Combo",
+    description: "O pacote completo para sair da cadeira com o visual impecável da cabeça ao queixo.",
+    price: "R$ 60",
+    icon: ComboIcon,
+    featured: true,
+  },
+  {
+    name: "Degradê",
+    description: "Transição perfeita entre os comprimentos, com acabamento limpo e preciso.",
+    price: "R$ 35",
+    icon: RazorIcon,
+  },
+  {
+    name: "Corte Social",
+    description: "Corte clássico, alinhado e elegante, ideal para o dia a dia e o trabalho.",
+    price: "R$ 30",
     icon: ScissorsIcon,
   },
   {
-    name: "Barba",
-    description: "Modelagem completa com toalha quente, navalha e produtos que cuidam da pele.",
-    price: "R$ 00,00",
-    icon: BeardIcon,
-  },
-  {
-    name: "Corte + Barba Combo",
-    description: "O pacote completo para sair da cadeira com o visual impecável da cabeça ao queixo.",
-    price: "R$ 00,00",
-    icon: ComboIcon,
-    featured: true,
+    name: "Sobrancelha e Bigode",
+    description: "Acabamento discreto que valoriza o rosto sem perder a naturalidade.",
+    price: "R$ 10",
+    icon: EyeIcon,
   },
 ];
 
@@ -56,9 +70,18 @@ export default function Services() {
           </div>
         </Reveal>
 
-        <div className="mx-auto mt-16 grid max-w-lg gap-6 lg:max-w-none lg:grid-cols-3">
+        {/*
+          Mobile/tablet: 1 coluna.
+          Desktop: grade de 6 colunas, cada card ocupa 2 → 3 cards na primeira linha
+          e 2 centralizados na segunda (o 4º card começa na coluna 2).
+        */}
+        <div className="mx-auto mt-16 grid max-w-lg gap-6 lg:max-w-none lg:grid-cols-6">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.name} delay={(i % 3) * 120}>
+            <Reveal
+              key={s.name}
+              delay={(i % 3) * 120}
+              className={`min-w-0 lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""}`}
+            >
               <article
                 className={`group relative flex h-full flex-col overflow-hidden border bg-ink p-8 transition-all duration-500 hover:-translate-y-2 hover:border-brand hover:shadow-glow ${
                   s.featured ? "border-brand/60" : "border-white/10"
@@ -89,7 +112,7 @@ export default function Services() {
                 <div className="relative mt-8 flex flex-wrap items-end justify-between gap-4 border-t border-white/10 pt-6">
                   <div>
                     <span className="block text-[10px] uppercase tracking-[0.25em] text-white/40">
-                      A partir de
+                      Valor
                     </span>
                     <span className="font-display text-3xl text-brand-gradient">{s.price}</span>
                   </div>

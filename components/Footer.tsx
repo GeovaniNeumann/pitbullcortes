@@ -117,7 +117,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col-reverse items-center gap-6 px-5 pb-24 pt-6 sm:flex-row sm:justify-between sm:pb-6 lg:px-8">
           <p className="text-center text-xs text-white/40 sm:text-left">
-            © 2025 Pitbull Cortes. Todos os direitos reservados.
+            © 2026 Pitbull Cortes. Todos os direitos reservados.
           </p>
           <div className="sm:mr-24">
             <BackToTop />

@@ -1,17 +1,35 @@
+import Image from "next/image";
 import { BRAND } from "@/lib/config";
-import { ExternalIcon, ImageIcon, InstagramIcon } from "./Icons";
+import { ExternalIcon, InstagramIcon } from "./Icons";
 import Reveal from "./Reveal";
 
 /**
- * Galeria com placeholders.
- * 👉 Para usar fotos reais: coloque em /public/galeria/ e troque cada item
- *    por <Image src="/galeria/corte-1.webp" ... fill className="object-cover" />
+ * Galeria com fotos reais.
+ * Os arquivos ficam na pasta /public:
+ *   /public/galeria1.webp
+ *   /public/galeria2.webp
+ *   /public/galeria3.webp
+ * 👉 Para trocar uma foto, substitua o arquivo ou altere o `src`.
  */
 const ITEMS = [
-  { label: "Barba Modelada" },
-  { label: "Corte Clássico" },
-  { label: "Corte + Barba" },
-  { label: "Acabamento na Navalha" },
+  {
+    src: "/galeria1.webp",
+    label: "Corte com Freestyle",
+    alt: "Degradê com riscos freestyle na lateral da cabeça",
+    wide: false,
+  },
+  {
+    src: "/galeria2.webp",
+    label: "Degradê + Barba",
+    alt: "Degradê baixo com barba alinhada",
+    wide: false,
+  },
+  {
+    src: "/galeria3.webp",
+    label: "Freestyle",
+    alt: "Corte com desenho freestyle e degradê na lateral",
+    wide: true, // no mobile ocupa as 2 colunas
+  },
 ];
 
 export default function Gallery() {
@@ -39,26 +57,36 @@ export default function Gallery() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+        {/* Mobile: 2 colunas (a 3ª foto ocupa a linha inteira). Desktop: 3 colunas */}
+        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
           {ITEMS.map((item, i) => (
-            <Reveal key={item.label} delay={i * 100}>
+            <Reveal
+              key={item.src}
+              delay={i * 100}
+              className={`min-w-0 ${item.wide ? "col-span-2 md:col-span-1" : ""}`}
+            >
               <figure
-                className="group relative aspect-[4/5] w-full overflow-hidden border border-white/10 bg-gradient-to-br from-steel to-steel-dark"
-                aria-label={`${item.label} (imagem de exemplo)`}
+                className={`group relative w-full overflow-hidden border border-white/10 bg-steel-dark ${
+                  item.wide ? "aspect-[4/3] md:aspect-[3/4]" : "aspect-[3/4]"
+                }`}
               >
-                {/* Placeholder visual */}
-                <div className="absolute inset-0 flex items-center justify-center text-white/10 transition-transform duration-700 group-hover:scale-110">
-                  <ImageIcon width={64} height={64} />
-                </div>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(30,144,255,.12),transparent_55%)]" />
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover object-[50%_45%] transition-transform duration-700 group-hover:scale-105"
+                />
 
-                {/* Overlay no hover */}
-                <figcaption className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/90 via-ink/50 to-transparent p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [@media(hover:none)]:opacity-100">
-                  <span className="translate-y-4 font-display text-xl uppercase tracking-wide transition-transform duration-500 group-hover:translate-y-0 [@media(hover:none)]:translate-y-0">
+                {/* Overlay com o nome do corte (sempre visível em telas de toque) */}
+                <figcaption className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/90 via-ink/30 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:p-5 [@media(hover:none)]:opacity-100">
+                  <span className="translate-y-4 font-display text-lg uppercase tracking-wide transition-transform duration-500 group-hover:translate-y-0 sm:text-xl [@media(hover:none)]:translate-y-0">
                     {item.label}
                   </span>
                 </figcaption>
-                <span className="absolute inset-0 border-2 border-brand opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                {/* Borda azul no hover */}
+                <span className="pointer-events-none absolute inset-0 border-2 border-brand opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               </figure>
             </Reveal>
           ))}

@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 const DIFFERENTIALS = [
   "Atendimento individual e com hora marcada",
-  "Profissionais experientes e atualizados nas tendências",
+  "Profissional experiente e atualizado nas tendências",
   "Ambiente masculino, confortável e com personalidade",
   "Acabamento na navalha com precisão",
   "Produtos de qualidade e higiene rigorosa",
