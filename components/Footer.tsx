@@ -124,12 +124,25 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Barra inferior: copyright + botão "Voltar ao topo" */}
+      {/* Barra inferior: copyright + créditos + botão "Voltar ao topo" */}
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col-reverse items-center gap-6 px-5 pb-24 pt-6 sm:flex-row sm:justify-between sm:pb-6 lg:px-8">
-          <p className="text-center text-xs text-white/40 sm:text-left">
-            © {new Date().getFullYear()} Pitbull Cortes. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col items-center gap-2 text-center text-xs text-white/40 sm:items-start sm:text-left">
+            <p>
+              © {new Date().getFullYear()} Pitbull Cortes. Todos os direitos reservados.
+            </p>
+            <p>
+              Desenvolvido por{" "}
+              <a
+                href="https://www.neumannwebsolutions.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-white/60 transition-colors duration-300 hover:text-brand"
+              >
+                Neumann Web Solutions
+              </a>
+            </p>
+          </div>
           <div className="sm:mr-24">
             <BackToTop />
           </div>
