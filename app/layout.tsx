@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Inter } from "next/font/google";
-// @ts-ignore — O Next.js resolve a importação de CSS global durante o build.
+// @ts-ignore: Next.js provides the CSS module type support at build time.
 import "./globals.css";
 
 // Fonte display (títulos) e fonte do corpo
@@ -10,6 +10,7 @@ const display = Anton({
   variable: "--font-display",
   display: "swap",
 });
+
 const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
@@ -21,7 +22,10 @@ const SITE_URL = "https://www.pitbullcortes.com.br";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Pitbull Cortes | Barbearia Premium em Guaraituba",
+  title: {
+    default: "Pitbull Cortes | Barbearia Premium em Guaraituba",
+    template: "%s | Pitbull Cortes",
+  },
   description:
     "Barbearia Pitbull Cortes - Cortes premium, barba e estilo com atitude. Agende pelo WhatsApp: (41) 98468-0992. Rua Enéas Marques, 139 - Guaraituba.",
   keywords: [
@@ -32,19 +36,42 @@ export const metadata: Metadata = {
     "degradê navalhado",
     "Guaraituba",
   ],
-  icons: { icon: "/pitlogoheader.webp", apple: "/pitlogoheader.webp" },
+  alternates: {
+    canonical: "/",
+  },
+  // 👇 APONTANDO PARA O SEU ARQUIVO .WEBP NA PASTA PUBLIC
+  icons: {
+    icon: "/favicon.webp",
+    shortcut: "/favicon.webp",
+    apple: "/favicon.webp", 
+  },
   openGraph: {
     title: "Pitbull Cortes | Barbearia Premium em Guaraituba",
     description:
       "Cortes premium com atitude. Agende seu horário pelo WhatsApp e viva a experiência Pitbull Cortes.",
-    images: [{ url: "/pithero.webp", width: 1200, height: 630 }],
+    url: SITE_URL,
+    siteName: "Pitbull Cortes",
+    images: [
+      {
+        url: "/pithero.webp",
+        width: 1200,
+        height: 630,
+        alt: "Barbearia Pitbull Cortes - Guaraituba",
+      },
+    ],
     locale: "pt_BR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Pitbull Cortes | Barbearia Premium em Guaraituba",
+    description:
+      "Cortes premium com atitude. Agende seu horário pelo WhatsApp e viva a experiência Pitbull Cortes.",
     images: ["/pithero.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -52,7 +79,7 @@ export const viewport: Viewport = {
   themeColor: "#050608",
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover", // habilita safe-area em celulares com notch
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -62,7 +89,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={`${display.variable} ${body.variable}`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }
